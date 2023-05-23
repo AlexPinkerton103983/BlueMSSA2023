@@ -1,2 +1,2 @@
-# BlueMSSA2023
-This is Blue's class repo
+# PinkertonMSSA2023
+This is Pinkerton's class repo
