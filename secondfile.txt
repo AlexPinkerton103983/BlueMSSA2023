@@ -1,3 +1,5 @@
 Here is a second file for test purposes
 
 Second line
+
+newBranch checkout
