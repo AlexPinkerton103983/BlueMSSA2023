@@ -10,10 +10,12 @@ $CSS = @'
 
 '@
 
-get-help convertto-html
+get-help convertto-html -showwindow
 
 get-help convertto-html
 
 Get-Service -Name s* |
   Out-GridView -OutputMode Multiple -Title 'Choose some services to be stopped' |
   Stop-Service -WhatIf 
+
+get-help new-aduser -showwindow

@@ -32,3 +32,9 @@ Get-Service | ForEach-Object {
 #WrongExample
 #This will run Get-Random 10 times, for each number in the array 1..10
 1..10 | ForEach-Object {Get-Random -SetSeed $_}
+
+<# CALCULATED PROPERTIES to CHANGE PROPERTY NAME #>
+#Example
+Get-ADComputer -Filter * | Select-Object @{n='ComputerName';e={$_.Name}} | Get-Process
+
+Get-Service -Whatif
