@@ -84,8 +84,9 @@ get-command *Eventlog*
 get-command get-eventlog
 get-command *event*
 get-help Get-EventLog -showwindow
+get-help get-winevent
 # ANSWER
-Get-EventLog -Logname Security -Newest 10
+Get-EventLog -Logname Security -Newest 10 # Depracated, use Get-WinEvent
 
 <# EXERCISE 4 #>
 <# TASK 1 #>
