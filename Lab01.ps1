@@ -58,5 +58,45 @@ get-command *content*
 # ANSWER
 Get-Content
 
+<# Task 2 #>
+<# Display a list of all local IPv4 addresses. #>
+get-help get-netipaddress -showwindow
+# ANSWER
+Get-NetIPAddress -AddressFamily IPv4
+
+<# Set the startup type of the BITS service to Automatic: #>
+get-command -noun *bits*
+Get-Help Set-Service -ShowWindow
+# ANSWER
+Set-Service -Name BITS -StartupType Automatic
+
+<# Test the network connection to LON-DC1. Your command should return only a True or False value, without any other output. #>
+get-command *test*
+get-help test-netconnection -showwindow
+test-netconnection -ComputerName LON-DC1 | Select-Object
+get-help Select-Object -showwindow
+test-netconnection -ComputerName LON-DC1 | Select-Object -property pingsucceeded
+# ANSWER
+Test-NetConnection -ComputerName LON-DC1 -InformationLevel Quiet
+
+<# Display the newest 10 entries from the local Security event log. #>
+get-command *Eventlog*
+get-command get-eventlog
+get-command *event*
+get-help Get-EventLog -showwindow
+# ANSWER
+Get-EventLog -Logname Security -Newest 10
+
+<# EXERCISE 4 #>
+<# TASK 1 #>
+<# What comparison operator does Windows PowerShell use for wildcard string comparisons and are they typically case-sensitive? #>
+get-help about*
+# ANSWER
+get-help about_Comparison_operators -showwindow 
+
+<# How would you use $Env to display the COMPUTERNAME environment variable? #>
+get-help about_enum -showwindow
+# ANSWER
+Get-Help about_Environment_Variables -ShowWindow
 
 
