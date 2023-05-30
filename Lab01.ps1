@@ -38,6 +38,25 @@ Clear-BCCache -WhatIf
 get-command -noun firewall
 Get-Command *firewall*
 get-help get-netfirewallfule -ShowWindow
+# ANSWER
+Get-NetFirewallRule
+Get-NetFirewallRule -Enabled True
+
+<# What command would you run to display a list of all locally bound IP addresses? #>
+get-command -noun *ip*
+get-help Get-NetIPAddress -ShowWindow
+# ANSWER
+Get-NetIPAddress
+
+<# What command would you run to suspend an active print job in a print queue? #>
+get-command *print*
+# ANSWER
+Suspend-PrintJob
+
+<# What native Windows PowerShell command would you run to review the content of a text file? #>
+get-command *content*
+# ANSWER
+Get-Content
 
 
 
