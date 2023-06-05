@@ -81,5 +81,26 @@ Get-NetFireWallRule -Enabled True | Select-Object DisplayName, Profile, directio
 get-help sort-object -showwindow
 get-help group-object -ShowWindow
 Get-NetFirewallRule -Enabled True | Select-Object DisplayName, Profile, Direction, Action | Sort-Object -Property @{Expression = "Profile"; Descending = $true}, @{Expression = "DisplayName"; Descending = $true}
-
+#ANSWER
 Get-NetFirewallRule -Enabled True | Select-Object DisplayName, Profile, Direction, Action | Sort-Object -Property Profile, DisplayName | Format-Table -GroupBy Profile
+
+<# TASK 5 #>
+<# Using a keyword such as neighbor, find a command that can display the network neighbors. #>
+Get-Command *neighbor*
+# ANSWER
+Get-NetNeighbor
+
+<# Review the help for the command #>
+# ANSWER
+Get-Help Get-NetNeighbor -online
+
+<# Display a list of network neighbors #>
+# ANSWER
+Get-NetNeighbor
+
+<# Display a list of the network neighbors that's sorted by state. #>
+# ANSWER
+Get-NetNeighbor | Sort-Object -Property State 
+
+<# Display a list of the network neighbors that's grouped by state, displaying only the IP address in as compact a format as possible and letting Windows PowerShell decide how to optimize the layout. #>
+Get-NetNeighbor | Select-Object -Property IPAddress, State | Group-Object State | Select-Object -Property IPAddress | format-list
