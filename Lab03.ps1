@@ -103,4 +103,30 @@ Get-NetNeighbor
 Get-NetNeighbor | Sort-Object -Property State 
 
 <# Display a list of the network neighbors that's grouped by state, displaying only the IP address in as compact a format as possible and letting Windows PowerShell decide how to optimize the layout. #>
-Get-NetNeighbor | Select-Object -Property IPAddress, State | Group-Object State | Select-Object -Property IPAddress | format-list
+Get-NetNeighbor | Sort-Object -Property State | Select-Object -Property IPAddress, State
+# ANSWER
+Get-NetNeighbor | Sort-Object -Property State | Select-Object -Property IPAddress, State | Format-Wide -GroupBy State -AutoSize
+
+<# Test your network connection to both LON-DC1 and LON-SVR1 so that you know the Domain Name System (DNS) client cache is populated with data. #>
+# ANSWER
+ping LON-DC1
+ping LON-SVR1
+get-command -verb Test
+# ANSWER
+Test-NetConnection -ComputerName LON-DC1.adatum.com
+Test-NetConnection -ComputerName LON-SVR1.adatum.com
+
+<# Using a keyword such as cache, find a command that can display items from the DNS client cache. #>
+get-command *cache*
+# Answer
+Get-DnsClientCache
+
+<# Display the DNS client cache. #>
+# Answer
+Get-DnsClientCache
+
+<# Display the DNS client cache. Sort the list by record name, and display only the record name, record type, and Time to Live. Use only one column to display all the data. #>
+Get-DnsClientCache | Get-Member
+Get-DnsClientCache | Select-Object *
+Get-DnsClientCache | Select-Object Name, Type, TimeToLive | Format-list -groupby name
+format-list
