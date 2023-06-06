@@ -158,4 +158,32 @@ Get-ADUser -Filter * -SearchBase "cn=Users, dc=adatum, dc=com" | Format-Table
 
 <# TASK 2 #>
 <# Display only the total number of Security event log entries that have the event ID 4624. #>
+Get-command *log*
+Get-Command *event*
+get-help *security*
+Get-Service *log*
+Get-Service *security*
+get-help get-service -showwindow
+get-service EventLog | get-help
+get-service EventLog | select-object -property *
+get-service eventlog | get-help -ShowWindow
+get-help get-logproperties -showwindow
+get-help *eventlog* -ShowWindow
+get-help about_logging_windows -showwindow
+get-help *eventID*
+get-help get-event
+get-help get-winevent -online
+get-winevent -listlog *security*
+# ANSWER
+get-winevent Security | Where-Object -property ID -eq 4624 | Measure-Object
+# ALTERNATE
+(get-winevent -logname security | Where-Object {$_.ID -eq 4624}).Count
+
+<# Display the full list of the Security event log entries that have the event ID 4624, and display only the time written, event ID, and message. #>
+get-winevent Security | get-member
+Get-WinEvent Security | Select-Object -Property *
+# ANSWER
+Get-WinEvent Security | Where-Object -Property ID -eq 4624 | Select-Object TimeCreated, ID, Message  | sort-object TimeCreated -bottom 10 | format-list
+
+<# Display a directory listing of all the items on the CERT drive. Include subfolders in the list. #>
 
