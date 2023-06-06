@@ -129,4 +129,33 @@ Get-DnsClientCache
 Get-DnsClientCache | Get-Member
 Get-DnsClientCache | Select-Object *
 Get-DnsClientCache | Select-Object Name, Type, TimeToLive | Format-list -groupby name
-format-list
+Get-help format-wide -online
+Get-DnsClientCache | Get-Member
+# ANSWER
+Get-DnsClientCache | Select-Object -property name, type, TimeToLive | Sort-Object -property name | Format-wide -Column 1
+
+<# Exercise 2 #>
+<# Task 1: Display a list of all the users in the Users container of Active Directory #>
+<# Using a keyword such as user, find a command that can list Active Directory users. #>
+Get-Command *aduser*
+# ANSWER
+Get-ADUser
+
+<# Review the help for the command and identify any mandatory parameters. #>
+# ANSWER
+Get-Help Get-ADUser -showwindow
+
+<# Display a list of all the users in Active Directory in a format that lets you easily compare properties. #>
+Get-ADUser -Filter * | Get-Member
+Get-ADUser -FIlter * | Format-List
+Get-ADUser -Filter * | Format-Table
+Get-ADUser -Filter * | Format-Wide -column 5
+# ANSWER
+Get-ADUser -Filter * | Format-Table
+
+<# Display the same list of all the users in the same format. This time, however, display only those users in the Users container of Active Directory. Use a search base of "cn=Users,dc=adatum,dc=com" for this task. #>
+Get-ADUser -Filter * -SearchBase "cn=Users, dc=adatum, dc=com" | Format-Table
+
+<# TASK 2 #>
+<# Display only the total number of Security event log entries that have the event ID 4624. #>
+
