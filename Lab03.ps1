@@ -186,4 +186,38 @@ Get-WinEvent Security | Select-Object -Property *
 Get-WinEvent Security | Where-Object -Property ID -eq 4624 | Select-Object TimeCreated, ID, Message  | sort-object TimeCreated -bottom 10 | format-list
 
 <# Display a directory listing of all the items on the CERT drive. Include subfolders in the list. #>
+get-command *drive*
+get-help get-psdrive -online
+# ANSWER
+Get-Childitem -path CERT: -Recurse
+
+<# Display the list again and display the name and issuer for only the certificates that don't have a private key. Display the results in one column. #>
+get-help get-childitem -Online
+get-Childitem -path CERT: -Recurse | Where-Object -property hasprivatekey -eq false | Select-Object name, issuer | format-wide -column 1
+# ANSWER
+Get-ChildItem -Path CERT: -Recurse | Where-Object -Property HasPrivateKey -eq $false | Select-Object FriendlyName, Issuer | Format-List
+
+<# Display the list again and display only the current certificates. Those certificates have a NotBefore date that's before today and a NotAfter date that's after today. Include the NotBefore and NotAfter properties in the results and display the results in a format that allows you to easily compare dates. Also, make sure that no data is truncated. #>
+Get-ChildItem -Path Cert: -Recurse | get-member
+get-help where-object -online
+Get-ChildItem -Path Cert: -Recurse | Select-Object ($_.hasprivatekey -eq $false -and $_.NotAfter -lt (Get-Date))
+get-help about_automatic_variables -showwindow
+Get-ChildItem -Path Cert: -Recurse | Where-Object {($_.hasprivatekey -eq $false) -and ($_.notafter -gt (Get-Date)) -and ($_.Notbefore -lt (Get-Date))} | Format-List
+# ANSWER
+Get-ChildItem -Path Cert: -Recurse | Where-Object {($_.hasprivatekey -eq $false) -and ($_.notafter -gt (Get-Date)) -and ($_.Notbefore -lt (Get-Date))} | Select-Object FriendlyName, Issuer, NotBefore, NotAfter, HasPrivateKey | format-table -wrap
+
+<# Task 4: Create a report that displays the disk volumes that are running low on space #>
+<# Display a list of the disk volumes. #>
+get-command *disk*
+get-command *volume*
+Get-Volume
+# ANSWER
+Get-Volume | Where-Object -property sizeremaining -gt 1 | format-list 
+
+<# Display a list of the volumes that have less than 99 percent free space and more than zero bytes of free space. Display only the drive letter and disk size, in megabytes (MB) to 3 decimal places. #>
+Get-Help about_calculated_properties -showwindow
+Get-Volume | Where-Object { ($_.SizeRemaining\$_.Size) -gt  }
+
+
+
 
