@@ -217,7 +217,3 @@ Get-Volume | Where-Object -property sizeremaining -gt 1 | format-list
 <# Display a list of the volumes that have less than 99 percent free space and more than zero bytes of free space. Display only the drive letter and disk size, in megabytes (MB) to 3 decimal places. #>
 Get-Help about_calculated_properties -showwindow
 Get-Volume | Where-Object { ($_.SizeRemaining\$_.Size) -gt  }
-
-
-
-
