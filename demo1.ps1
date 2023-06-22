@@ -20,7 +20,7 @@ Get-PSProvider
 <# A provider in PowerShell is an interface that allows file system like access to a datastore. #>
 <# Lists the capabilities of each provider #>
 
-cd function:\
+# cd function:\
 <# CD is alias for set-location, changes current drive to the function provider #>
 
 Get-PSDrive
@@ -42,3 +42,20 @@ Get-Command -Module CimCmdlets
 Get-CimInstance -ClassName *operating*
 Get-CimInstance -ClassName Win32_LogicalDisk | Get-Member
 Get-Volume | Select-Object DriveLetter,Size,SizeRemaining
+
+<# Displays methods available for that type of object #>
+Get-CimInstance -ClassName Win32_Service | Get-Member -MemberType Method
+
+<# Review the methods available for a specific class #>
+Get-CimClass -Class Win32_Service | Select-Object -Property *
+
+<# Queries the spooler service as a WMI object and invokes StopService method #>
+Get-CimClass -ClassName Win32_Service | Where-Object {$_.CimClassProperties -like 'spooler'}
+$CimSpoolerService.StopService()
+
+<# Looking for how to change IP address? #>
+Get-CimClass -NameSpace root/CIMV2 | Where-Object {$_.CimClassName -like 'win32_*configuration'}
+
+Get-CimInstance -Classname Win32_NetworkAdapterConfiguration
+
+Get-CimInstance -Classname win32_networkadapterconfiguration | Select-Object -Property Description,IPAddress
